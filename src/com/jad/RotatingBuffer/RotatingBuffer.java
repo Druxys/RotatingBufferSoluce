@@ -9,19 +9,20 @@ public class RotatingBuffer<Data> {
     private boolean empty;
     private final int size;
 
-    public RotatingBuffer(Class<Data> dataClass, int size) {
+    public RotatingBuffer(int size) {
         this.size = (size <= 0) ? 1 : size;
         this.empty = true;
-        this.dataArray = (Data[]) Array.newInstance(dataClass, this.getSize());
+        this.dataArray = (Data[]) new Object[this.getSize()];
+        //Array.newInstance(dataClass, this.getSize());
         this.reader = new RotatingBufferReader<Data>(this);
         this.writer = new RotatingBufferWriter<Data>(this);
     }
 
-   public int getSize() {
+    public int getSize() {
         return this.size;
     }
 
-    public Data[] getDataArray() {
+    Data[] getDataArray() {
         return this.dataArray;
     }
 

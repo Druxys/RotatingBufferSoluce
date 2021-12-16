@@ -1,13 +1,15 @@
 package com.jad;
 import com.jad.RotatingBuffer.RotatingBuffer;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 public class Main {
 
     public static void main(String[] args) {
-        RotatingBuffer<Integer> buffer = new RotatingBuffer<>(Integer.class, 2);
+        RotatingBuffer<Integer> buffer = new RotatingBuffer<>(2);
         Random rand = new Random();
+
         Thread writer = new Thread(() -> {
             for (int i = 0; i < 100; i++) {
                 if(!buffer.write(i)) {
